@@ -3,6 +3,13 @@
   "version": "v0.3",
   "type": "object",
   "properties": {
+    "centre": {
+      "description": "Name of centre",
+      "type": "string",
+      "pattern": "^[a-z].*$",
+      "minLength": 3,
+      "maxLength": 50
+    },
     "bed_counts": {
       "type": "object",
       "additionalProperties": false,
