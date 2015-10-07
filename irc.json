@@ -10,12 +10,12 @@
       "multipleOf": 1
     },
     "date": {
-      "description": "Date when API invoked",
+      "description": "Date when API invoked - UTC standard",
       "type": "date-time",
       "format": "date"
     },
     "time": {
-      "description": "Time when API invoked",
+      "description": "Time when API invoked - UTC standard",
       "type": "date-time",
       "format": "time"
     },
