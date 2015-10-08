@@ -1,93 +1,45 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "version": "v0.3",
-  "type": "object",
-  "properties": {
-    "centre": {
-      "description": "Name of centre",
-      "type": "string",
-      "pattern": "^[a-z].*$",
-      "minLength": 3,
-      "maxLength": 50
-    },
-    "bed_counts": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "version": "v0.4",
+    "type": "object",
+    "properties": {
+        "centre": {
+            "description": "Name of centre",
+            "type": "string",
+            "pattern": "^[a-z].*$",
+            "minLength": 3,
+            "maxLength": 50
+        },
         "male": {
-          "description": "Number of male beds occupied",
-          "type": "integer",
-          "minimum": 0,
-          "multipleOf": 1.0
+            "description": "Number of male beds occupied",
+            "type": "integer",
+            "minimum": 0,
+            "multipleOf": 1
         },
         "female": {
-          "description": "Number of female beds occupied",
-          "type": "integer",
-          "minimum": 0,
-          "multipleOf": 1.0
+            "description": "Number of female beds occupied",
+            "type": "integer",
+            "minimum": 0,
+            "multipleOf": 1
         },
-        "out_of_commission": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "ooc_male": {
-              "description": "Number of male out of commission beds",
-              "type": "integer",
-              "minimum": 0,
-              "multipleOf": 1.0
-            },
-            "ooc_female": {
-              "description": "Number of female out of commission beds",
-              "type": "integer",
-              "minimum": 0,
-              "multipleOf": 1.0
-            },
-            "details": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "ref": {
-                    "type": "string",
-                    "pattern": "^[a-z].*$",
-                    "minLength": 0,
-                    "maxLength": 10
-                  },
-                  "reason": {
-                    "type": "string",
-                    "pattern": "^[a-z].*$",
-                    "minLength": 0,
-                    "maxLength": 75
-                  },
-                  "gender": {
-                    "type": "string",
-                    "minLength": 1,
-                    "maxLength": 2,
-                    "enum": [
-                      "na",
-                      "m",
-                      "f"
-                    ]
-                  }
-                },
-                "required": [
-                  "ref",
-                  "reason"
-                ]
-              }
-            }
-          },
-          "required": [
-            "ooc_male",
-            "ooc_female"
-          ]
+        "ooc_male": {
+            "description": "Number of male out of commission beds",
+            "type": "integer",
+            "minimum": 0,
+            "multipleOf": 1
+        },
+        "ooc_female": {
+            "description": "Number of female out of commission beds",
+            "type": "integer",
+            "minimum": 0,
+            "multipleOf": 1
         }
-      }
     },
     "required": [
-      "male",
-      "female",
-      "out_of_commission"
+        "centre",
+        "male",
+        "female",
+        "ooc_male",
+        "ooc_female"
     ]
-  }
 }
