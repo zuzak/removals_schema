@@ -33,3 +33,6 @@ Clients are responsible for:
 This is sent at regular intervals (as agreed) with the provider which provides fundamental 
 Clients are responsible for:
 * not queuing if failure occurs
+* submitting regularly
+* raising alerts if a ```4xx``` or ```5xx``` alert occurs
+* if a ```3xx``` is received follow the redirection
