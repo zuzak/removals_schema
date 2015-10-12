@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "centre": {
+      "description": "Name of centre",
+      "type": "string",
+      "pattern": "^[a-z]{3,30}$"
+    },
+    "male_occupied": {
+      "description": "Number of male beds occupied",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5000
+    },
+    "female_occupied": {
+      "description": "Number of female beds occupied",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5000
+    },
+    "male_outofcommission": {
+      "description": "Number of male out of commission beds",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5000
+    },
+    "female_outofcommission": {
+      "description": "Number of female out of commission beds",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5000
+    }
+  },
+  "required": [
+    "centre",
+    "male_occupied",
+    "female_occupied",
+    "male_outofcommission",
+    "female_outofcommission"
+  ]
+}
