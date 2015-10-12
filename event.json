@@ -1,0 +1,202 @@
+{
+  "definitions": {
+    "transaction_id": {
+      "description": "Incrementing ID keyed to centre used to ensure that consistent order is maintained, can be dynamically reset to 1 by the client after 1000000000",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2000000000
+    },
+    "timestamp": {
+      "description": "Timestamp that event occurred",
+      "type": "string",
+      "format": "date-time"
+    },
+    "centre": {
+      "description": "Name of centre",
+      "type": "string",
+      "pattern": "^[a-z]{3,30}$"
+    },
+    "nationality": {
+      "description": "Case nationality. xxx/na? when nationality is not known",
+      "type": "string",
+      "pattern": "^(na)|([a-z]{3})$"
+    },
+    "gender": {
+      "description": "Gender",
+      "type": "string",
+      "enum": [
+        "na",
+        "m",
+        "f"
+      ]
+    },
+    "cid_id": {
+      "description": "Case information database identifier",
+      "type": "integer",
+      "maxLength": 100,
+      "minimum": 0
+    },
+    "operation": {
+      "description": "Event operation",
+      "type": "string"
+    }
+  },
+  "oneOf": [
+    {
+      "description": "out of operation",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "timestamp": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "transaction_id": {
+          "$ref": "#/definitions/transaction_id"
+        },
+        "centre": {
+          "$ref": "#/definitions/centre"
+        },
+        "operation": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/operation"
+            },
+            {
+              "enum": [
+                "out of operation",
+                "in of operation"
+              ]
+            }
+          ]
+        },
+        "details": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ref",
+            "reason",
+            "gender"
+          ],
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^([A-Za-z0-9- ]{0,10})$"
+            },
+            "reason": {
+              "type": "string",
+              "pattern": "^([A-Za-z0-9- ]{0,75})$"
+            },
+            "gender": {
+              "$ref": "#/definitions/gender"
+            }
+          }
+        }
+      },
+      "required": [
+        "operation",
+        "details",
+        "timestamp",
+        "transaction_id",
+        "centre"
+      ]
+    },
+    {
+      "description": "Simple people related events",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "timestamp": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "transaction_id": {
+          "$ref": "#/definitions/transaction_id"
+        },
+        "centre": {
+          "$ref": "#/definitions/centre"
+        },
+        "operation": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/operation"
+            },
+            {
+              "enum": [
+                "check in",
+                "check out",
+                "reinstatement"
+              ]
+            }
+          ]
+        },
+        "cid_id": {
+          "$ref": "#/definitions/cid_id"
+        },
+        "gender": {
+          "$ref": "#/definitions/gender"
+        },
+        "nationality": {
+          "$ref": "#/definitions/nationality"
+        }
+      },
+      "required": [
+        "operation",
+        "cid_id",
+        "gender",
+        "timestamp",
+        "transaction_id",
+        "centre",
+        "nationality"
+      ]
+    },
+    {
+      "description": "Inter-site transfer related events",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "timestamp": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "transaction_id": {
+          "$ref": "#/definitions/transaction_id"
+        },
+        "centre": {
+          "$ref": "#/definitions/centre"
+        },
+        "centre_to": {
+          "$ref": "#/definitions/centre"
+        },
+        "operation": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/operation"
+            },
+            {
+              "enum": [
+                "inter site transfer"
+              ]
+            }
+          ]
+        },
+        "cid_id": {
+          "$ref": "#/definitions/cid_id"
+        },
+        "gender": {
+          "$ref": "#/definitions/gender"
+        },
+        "nationality": {
+          "$ref": "#/definitions/nationality"
+        }
+      },
+      "required": [
+        "operation",
+        "cid_id",
+        "gender",
+        "timestamp",
+        "transaction_id",
+        "centre",
+        "centre_to",
+        "nationality"
+      ]
+    }
+  ]
+}
