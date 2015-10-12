@@ -7,25 +7,25 @@
       "type": "string",
       "pattern": "^[a-z]{3,30}$"
     },
-    "male": {
+    "male_occupied": {
       "description": "Number of male beds occupied",
       "type": "integer",
       "minimum": 0,
       "maximum": 5000
     },
-    "female": {
+    "female_occupied": {
       "description": "Number of female beds occupied",
       "type": "integer",
       "minimum": 0,
       "maximum": 5000
     },
-    "ooc_male": {
+    "male_outofcommission": {
       "description": "Number of male out of commission beds",
       "type": "integer",
       "minimum": 0,
       "maximum": 5000
     },
-    "ooc_female": {
+    "female_outofcommission": {
       "description": "Number of female out of commission beds",
       "type": "integer",
       "minimum": 0,
@@ -34,9 +34,9 @@
   },
   "required": [
     "centre",
-    "male",
-    "female",
-    "ooc_male",
-    "ooc_female"
+    "male_occupied",
+    "female_occupied",
+    "male_outofcommission",
+    "female_outofcommission"
   ]
 }
