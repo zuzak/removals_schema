@@ -34,12 +34,14 @@ The API presents the following HTTP endpoints:
 
 ## Event API
 Invoked on the following events by the IRC:
+
 1. When a detainee checked in IRC.
-2. When a detainee checked out IRC.
-3. When a bed becomes out of operation.
-4. When a bed returns into operation.
-5. When a detainee is moved between moved between two sites by the IRC.
-6. When a detainee is reinstated.
+1. When a detainee checked out IRC.
+1. When a bed becomes out of operation.
+1. When a bed returns into operation.
+1. When a detainee is moved between moved between two sites by the IRC.
+1. When a detainee is reinstated.
+
 ##### Process flow:
 - Capture the data required as described in the schema
 - Attach a transaction ID
