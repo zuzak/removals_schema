@@ -25,7 +25,6 @@
       "description": "Gender",
       "type": "string",
       "enum": [
-        "na",
         "m",
         "f"
       ]
