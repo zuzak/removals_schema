@@ -17,15 +17,14 @@
       "pattern": "^[a-z]{3,30}$"
     },
     "nationality": {
-      "description": "Case nationality. xxx/na? when nationality is not known",
+      "description": "Case nationality. xxx when nationality is not known refer to ISO 3166 alpha-3",
       "type": "string",
-      "pattern": "^(na)|([a-z]{3})$"
+      "pattern": "^([a-z]{3})$"
     },
     "gender": {
       "description": "Gender",
       "type": "string",
       "enum": [
-        "na",
         "m",
         "f"
       ]
@@ -43,7 +42,7 @@
   },
   "oneOf": [
     {
-      "description": "out of operation",
+      "description": "commission changing",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -63,8 +62,8 @@
             },
             {
               "enum": [
-                "out of operation",
-                "in of operation"
+                "out commission",
+                "in commission"
               ]
             }
           ]
@@ -101,7 +100,7 @@
       ]
     },
     {
-      "description": "Simple people related events",
+      "description": "Basic related events",
       "type": "object",
       "additionalProperties": false,
       "properties": {
