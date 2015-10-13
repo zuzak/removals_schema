@@ -17,9 +17,9 @@
       "pattern": "^[a-z]{3,30}$"
     },
     "nationality": {
-      "description": "Case nationality. xxx/na? when nationality is not known",
+      "description": "Case nationality. xxx when nationality is not known refer to ISO 3166 alpha-3",
       "type": "string",
-      "pattern": "^(na)|([a-z]{3})$"
+      "pattern": "^([a-z]{3})$"
     },
     "gender": {
       "description": "Gender",
