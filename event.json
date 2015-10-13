@@ -42,7 +42,7 @@
   },
   "oneOf": [
     {
-      "description": "out of operation",
+      "description": "commission changing",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -62,8 +62,8 @@
             },
             {
               "enum": [
-                "out of operation",
-                "in of operation"
+                "out commission",
+                "in commission"
               ]
             }
           ]
