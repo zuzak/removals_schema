@@ -100,7 +100,7 @@
       ]
     },
     {
-      "description": "Simple people related events",
+      "description": "Basic related events",
       "type": "object",
       "additionalProperties": false,
       "properties": {
