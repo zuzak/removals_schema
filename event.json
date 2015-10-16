@@ -88,6 +88,9 @@
             "reason": {
               "$ref": "#/definitions/reason"
             },
+            "single_occupancy_cid_id": {
+              "$ref": "#/definitions/cid_id"
+            },
             "gender": {
               "$ref": "#/definitions/gender"
             }
