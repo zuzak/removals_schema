@@ -35,18 +35,36 @@
       "maxLength": 100,
       "minimum": 0
     },
-    "reason": {
+    "intersite_reason": {
       "type": "string",
-      "pattern": "^([A-Za-z0-9- ]{0,75})$"
+      "enum": [
+        "Rule 40/42 dynamic risk assessment",
+        "Moved to sterile condition pending removal",
+        "Home Office interview scheme",
+        "Separation of detainees",
+        "Safety concern",
+        "Behavioral concern",
+        "Healthcare request",
+        "Detained partner in other centre",
+        "Charter movement"
+      ]
+    },
+    "out_of_commission_reason": {
+      "type": "string"
     },
     "operation": {
       "description": "Event operation",
       "type": "string"
+    },
+    "bed_ref": {
+      "description": "Bed reference ID",
+      "type": "string",
+      "pattern": "^([A-Za-z0-9- ]{0,75})$"
     }
   },
   "oneOf": [
     {
-      "description": "commission changing",
+      "description": "Out of commission",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -66,43 +84,139 @@
             },
             {
               "enum": [
-                "out commission",
+                "out commission"
+              ]
+            }
+          ]
+        },
+        "bed_ref": {
+          "$ref": "#/definitions/bed_ref"
+        },
+        "reason": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/out_of_commission_reason"
+            },
+            {
+              "enum": [
+                "Maintenance - Malicious/Accidental Damage",
+                "Maintenance - Health and Safety Concern",
+                "Maintenance – Planned works",
+                "Crime Scene",
+                "Medical Isolation",
+                "Other"
+              ]
+            }
+          ]
+        },
+        "gender": {
+          "$ref": "#/definitions/gender"
+        }
+      },
+      "required": [
+        "operation",
+        "timestamp",
+        "transaction_id",
+        "centre",
+        "bed_ref",
+        "reason",
+        "gender"
+      ]
+    },
+    {
+      "description": "Out of commission single occupancy",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "timestamp": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "transaction_id": {
+          "$ref": "#/definitions/transaction_id"
+        },
+        "centre": {
+          "$ref": "#/definitions/centre"
+        },
+        "operation": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/operation"
+            },
+            {
+              "enum": [
+                "out commission"
+              ]
+            }
+          ]
+        },
+        "bed_ref": {
+          "$ref": "#/definitions/bed_ref"
+        },
+        "reason": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/out_of_commission_reason"
+            },
+            {
+              "enum": [
+                "Single Occupancy"
+              ]
+            }
+          ]
+        },
+        "single_occupancy_cid": {
+          "$ref": "#/definitions/cid_id"
+        },
+        "gender": {
+          "$ref": "#/definitions/gender"
+        }
+      },
+      "required": [
+        "operation",
+        "timestamp",
+        "transaction_id",
+        "centre",
+        "bed_ref",
+        "reason",
+        "gender"
+      ]
+    },
+    {
+      "description": "In commission",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "timestamp": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "transaction_id": {
+          "$ref": "#/definitions/transaction_id"
+        },
+        "centre": {
+          "$ref": "#/definitions/centre"
+        },
+        "operation": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/operation"
+            },
+            {
+              "enum": [
                 "in commission"
               ]
             }
           ]
         },
-        "details": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": [
-            "ref",
-            "reason",
-            "gender"
-          ],
-          "properties": {
-            "ref": {
-              "type": "string",
-              "pattern": "^([A-Za-z0-9- ]{0,10})$"
-            },
-            "reason": {
-              "$ref": "#/definitions/reason"
-            },
-            "single_occupancy_cid_id": {
-              "$ref": "#/definitions/cid_id"
-            },
-            "gender": {
-              "$ref": "#/definitions/gender"
-            }
-          }
+        "bed_ref": {
+          "$ref": "#/definitions/bed_ref"
         }
       },
       "required": [
         "operation",
-        "details",
         "timestamp",
         "transaction_id",
-        "centre"
+        "centre",
+        "bed_ref"
       ]
     },
     {
@@ -183,7 +297,7 @@
           ]
         },
         "reason": {
-          "$ref": "#/definitions/reason"
+          "$ref": "#/definitions/intersite_reason"
         },
         "cid_id": {
           "$ref": "#/definitions/cid_id"
