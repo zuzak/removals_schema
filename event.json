@@ -178,6 +178,7 @@
         "centre",
         "bed_ref",
         "reason",
+        "single_occupancy_cid",
         "gender"
       ]
     },
