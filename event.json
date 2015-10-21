@@ -46,7 +46,8 @@
         "Behavioral concern",
         "Healthcare request",
         "Detained partner in other centre",
-        "Charter movement"
+        "Charter movement",
+        "Other"
       ]
     },
     "out_of_commission_reason": {
