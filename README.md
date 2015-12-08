@@ -41,6 +41,7 @@ Invoked on the following events by the IRC:
 1. When a bed returns into operation.
 1. When a detainee is moved between moved between two sites by the IRC.
 1. When a detainee is reinstated.
+1. When a detainee cid/gender/nationality is updated.
 
 ##### Process flow:
 - Capture the data required as described in the schema
