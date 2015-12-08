@@ -29,6 +29,12 @@
       "maxLength": 100,
       "minimum": 0
     },
+    "person_id": {
+      "description": "Unique id that the centre uses to refer to the individual",
+      "type": "integer",
+      "maxLength": 100,
+      "minimum": 0
+    },
     "intersite_reason": {
       "type": "string",
       "enum": [
@@ -152,8 +158,8 @@
             }
           ]
         },
-        "single_occupancy_cid": {
-          "$ref": "#/definitions/cid_id"
+        "single_occupancy_person_id": {
+          "$ref": "#/definitions/person_id"
         },
         "gender": {
           "$ref": "#/definitions/gender"
@@ -165,7 +171,7 @@
         "centre",
         "bed_ref",
         "reason",
-        "single_occupancy_cid",
+        "single_occupancy_person_id",
         "gender"
       ]
     },
@@ -204,7 +210,7 @@
       ]
     },
     {
-      "description": "Basic related events",
+      "description": "Check in event",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -221,12 +227,13 @@
             },
             {
               "enum": [
-                "check in",
-                "check out",
-                "reinstatement"
+                "check in"
               ]
             }
           ]
+        },
+        "person_id": {
+          "$ref": "#/definitions/person_id"
         },
         "cid_id": {
           "$ref": "#/definitions/cid_id"
@@ -241,10 +248,92 @@
       "required": [
         "operation",
         "cid_id",
+        "person_id",
         "gender",
         "timestamp",
         "centre",
         "nationality"
+      ]
+    },
+    {
+      "description": "Update to an individual event",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "timestamp": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "centre": {
+          "$ref": "#/definitions/centre"
+        },
+        "operation": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/operation"
+            },
+            {
+              "enum": [
+                "update individual"
+              ]
+            }
+          ]
+        },
+        "person_id": {
+          "$ref": "#/definitions/person_id"
+        },
+        "cid_id": {
+          "$ref": "#/definitions/cid_id"
+        },
+        "gender": {
+          "$ref": "#/definitions/gender"
+        },
+        "nationality": {
+          "$ref": "#/definitions/nationality"
+        }
+      },
+      "required": [
+        "operation",
+        "cid_id",
+        "person_id",
+        "gender",
+        "timestamp",
+        "centre",
+        "nationality"
+      ]
+    },
+    {
+      "description": "Basic movement events",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "timestamp": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "centre": {
+          "$ref": "#/definitions/centre"
+        },
+        "operation": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/operation"
+            },
+            {
+              "enum": [
+                "check out",
+                "reinstatement"
+              ]
+            }
+          ]
+        },
+        "person_id": {
+          "$ref": "#/definitions/person_id"
+        }
+      },
+      "required": [
+        "operation",
+        "person_id",
+        "timestamp",
+        "centre"
       ]
     },
     {
@@ -276,25 +365,17 @@
         "reason": {
           "$ref": "#/definitions/intersite_reason"
         },
-        "cid_id": {
-          "$ref": "#/definitions/cid_id"
-        },
-        "gender": {
-          "$ref": "#/definitions/gender"
-        },
-        "nationality": {
-          "$ref": "#/definitions/nationality"
+        "person_id": {
+          "$ref": "#/definitions/person_id"
         }
       },
       "required": [
         "operation",
-        "cid_id",
-        "gender",
+        "person_id",
         "timestamp",
         "centre",
         "centre_to",
-        "reason",
-        "nationality"
+        "reason"
       ]
     }
   ]
