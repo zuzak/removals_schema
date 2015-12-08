@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/UKHomeOffice/removals_schema/issues"
   },
+  "scripts": {
+    "test": "node generate.js event.json 100 && node generate.js heartbeat.json 100"
+  },
   "homepage": "https://github.com/UKHomeOffice/removals_schema#readme"
 }
