@@ -44,8 +44,6 @@ Invoked on the following events by the IRC:
 
 ##### Process flow:
 - Capture the data required as described in the schema
-- Attach a transaction ID
- - This is an incrementing number, keyed to the centre name, once it reaches a number over `1,000,000,000` the client should reset the counter to `1` to avoid storing overly large IDs as the system grows
 - Validate data with the [schema](./event.json)
 - Submit to the correct endpoint (as provided to the provider) over HTTPS/TLS
 - Should an error occur submitting, queue the event, and retry the queue at `1 minute` intervals raising exceptions to the relevant support party so that it can be addressed and monitored
