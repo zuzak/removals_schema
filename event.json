@@ -1,11 +1,5 @@
 {
   "definitions": {
-    "transaction_id": {
-      "description": "Incrementing ID keyed to centre used to ensure that consistent order is maintained, can be dynamically reset to 1 by the client after 1000000000",
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 2000000000
-    },
     "timestamp": {
       "description": "Timestamp that event occurred",
       "type": "string",
@@ -31,6 +25,12 @@
     },
     "cid_id": {
       "description": "Case information database identifier",
+      "type": "integer",
+      "maxLength": 100,
+      "minimum": 0
+    },
+    "person_id": {
+      "description": "Unique id that the centre uses to refer to the individual",
       "type": "integer",
       "maxLength": 100,
       "minimum": 0
@@ -71,9 +71,6 @@
       "properties": {
         "timestamp": {
           "$ref": "#/definitions/timestamp"
-        },
-        "transaction_id": {
-          "$ref": "#/definitions/transaction_id"
         },
         "centre": {
           "$ref": "#/definitions/centre"
@@ -117,7 +114,6 @@
       "required": [
         "operation",
         "timestamp",
-        "transaction_id",
         "centre",
         "bed_ref",
         "reason",
@@ -131,9 +127,6 @@
       "properties": {
         "timestamp": {
           "$ref": "#/definitions/timestamp"
-        },
-        "transaction_id": {
-          "$ref": "#/definitions/transaction_id"
         },
         "centre": {
           "$ref": "#/definitions/centre"
@@ -165,8 +158,8 @@
             }
           ]
         },
-        "single_occupancy_cid": {
-          "$ref": "#/definitions/cid_id"
+        "single_occupancy_person_id": {
+          "$ref": "#/definitions/person_id"
         },
         "gender": {
           "$ref": "#/definitions/gender"
@@ -175,11 +168,10 @@
       "required": [
         "operation",
         "timestamp",
-        "transaction_id",
         "centre",
         "bed_ref",
         "reason",
-        "single_occupancy_cid",
+        "single_occupancy_person_id",
         "gender"
       ]
     },
@@ -190,9 +182,6 @@
       "properties": {
         "timestamp": {
           "$ref": "#/definitions/timestamp"
-        },
-        "transaction_id": {
-          "$ref": "#/definitions/transaction_id"
         },
         "centre": {
           "$ref": "#/definitions/centre"
@@ -216,21 +205,17 @@
       "required": [
         "operation",
         "timestamp",
-        "transaction_id",
         "centre",
         "bed_ref"
       ]
     },
     {
-      "description": "Basic related events",
+      "description": "Check in event",
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "timestamp": {
           "$ref": "#/definitions/timestamp"
-        },
-        "transaction_id": {
-          "$ref": "#/definitions/transaction_id"
         },
         "centre": {
           "$ref": "#/definitions/centre"
@@ -242,12 +227,13 @@
             },
             {
               "enum": [
-                "check in",
-                "check out",
-                "reinstatement"
+                "check in"
               ]
             }
           ]
+        },
+        "person_id": {
+          "$ref": "#/definitions/person_id"
         },
         "cid_id": {
           "$ref": "#/definitions/cid_id"
@@ -262,11 +248,92 @@
       "required": [
         "operation",
         "cid_id",
+        "person_id",
         "gender",
         "timestamp",
-        "transaction_id",
         "centre",
         "nationality"
+      ]
+    },
+    {
+      "description": "Update to an individual event",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "timestamp": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "centre": {
+          "$ref": "#/definitions/centre"
+        },
+        "operation": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/operation"
+            },
+            {
+              "enum": [
+                "update individual"
+              ]
+            }
+          ]
+        },
+        "person_id": {
+          "$ref": "#/definitions/person_id"
+        },
+        "cid_id": {
+          "$ref": "#/definitions/cid_id"
+        },
+        "gender": {
+          "$ref": "#/definitions/gender"
+        },
+        "nationality": {
+          "$ref": "#/definitions/nationality"
+        }
+      },
+      "required": [
+        "operation",
+        "cid_id",
+        "person_id",
+        "gender",
+        "timestamp",
+        "centre",
+        "nationality"
+      ]
+    },
+    {
+      "description": "Basic movement events",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "timestamp": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "centre": {
+          "$ref": "#/definitions/centre"
+        },
+        "operation": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/operation"
+            },
+            {
+              "enum": [
+                "check out",
+                "reinstatement"
+              ]
+            }
+          ]
+        },
+        "person_id": {
+          "$ref": "#/definitions/person_id"
+        }
+      },
+      "required": [
+        "operation",
+        "person_id",
+        "timestamp",
+        "centre"
       ]
     },
     {
@@ -276,9 +343,6 @@
       "properties": {
         "timestamp": {
           "$ref": "#/definitions/timestamp"
-        },
-        "transaction_id": {
-          "$ref": "#/definitions/transaction_id"
         },
         "centre": {
           "$ref": "#/definitions/centre"
@@ -301,26 +365,17 @@
         "reason": {
           "$ref": "#/definitions/intersite_reason"
         },
-        "cid_id": {
-          "$ref": "#/definitions/cid_id"
-        },
-        "gender": {
-          "$ref": "#/definitions/gender"
-        },
-        "nationality": {
-          "$ref": "#/definitions/nationality"
+        "person_id": {
+          "$ref": "#/definitions/person_id"
         }
       },
       "required": [
         "operation",
-        "cid_id",
-        "gender",
+        "person_id",
         "timestamp",
-        "transaction_id",
         "centre",
         "centre_to",
-        "reason",
-        "nationality"
+        "reason"
       ]
     }
   ]

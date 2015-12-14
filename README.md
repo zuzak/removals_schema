@@ -41,11 +41,10 @@ Invoked on the following events by the IRC:
 1. When a bed returns into operation.
 1. When a detainee is moved between moved between two sites by the IRC.
 1. When a detainee is reinstated.
+1. When a detainee cid/gender/nationality is updated.
 
 ##### Process flow:
 - Capture the data required as described in the schema
-- Attach a transaction ID
- - This is an incrementing number, keyed to the centre name, once it reaches a number over `1,000,000,000` the client should reset the counter to `1` to avoid storing overly large IDs as the system grows
 - Validate data with the [schema](./event.json)
 - Submit to the correct endpoint (as provided to the provider) over HTTPS/TLS
 - Should an error occur submitting, queue the event, and retry the queue at `1 minute` intervals raising exceptions to the relevant support party so that it can be addressed and monitored
