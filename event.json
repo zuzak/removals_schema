@@ -99,7 +99,7 @@
               "enum": [
                 "Maintenance - Malicious/Accidental Damage",
                 "Maintenance - Health and Safety Concern",
-                "Maintenance – Planned works",
+                "Maintenance - Planned works",
                 "Crime Scene",
                 "Medical Isolation",
                 "Other"
