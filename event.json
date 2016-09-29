@@ -58,7 +58,7 @@
       "type": "string"
     },
     "bed_ref": {
-      "description": "Bed reference ID",
+      "description": "Bed reference ID, prefix an identifier with TEMP when the actual Bed Reference ID is not yet known or determined",
       "type": "string",
       "pattern": "^([A-Za-z0-9- ]{0,75})$"
     }
