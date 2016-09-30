@@ -153,7 +153,8 @@
             },
             {
               "enum": [
-                "Single Occupancy"
+                "Single Occupancy",
+                "Single Occupancy - Reserved"
               ]
             }
           ]
